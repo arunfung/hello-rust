@@ -1,13 +1,14 @@
 use std::{fs, io};
 use std::cmp::Ordering;
+use std::error::Error;
 use rand::Rng;
 
-fn main() {
+fn main() -> Result<(), Box<dyn Error>> {
     // 1、猜测数字的小游戏
     // guess_the_number();
 
     // 2、请求一个url并将获取的HTML转成md
-    // html_to_md();
+    html_to_md()
 
     // 3、函数传参
     // function_parameter();
@@ -16,7 +17,7 @@ fn main() {
     // returned_value();
 
     // 5、聊天服务数据结构
-    chat_room();
+    // chat_room();
 
     // 6、loop、while、for
     // let n = 10;
@@ -62,14 +63,16 @@ fn guess_the_number() {
 }
 
 // 2、请求一个url并将获取的HTML转成md
-fn html_to_md() {
-    let url = "https://www.rust-lang.org/";
+fn html_to_md() -> Result<(), Box<dyn std::error::Error>> {
+    let url = "https://www.rust-lang.orgc";
     let output = "rust.md";
     println!("Fetching url: {}", url);
-    let body = reqwest::blocking::get(url).unwrap().text().unwrap();
+    let body = reqwest::blocking::get(url)?.text()?;
     println!("Converting html to markdown...");
     let md = html2md::parse_html(&body);
-    fs::write(output, md.as_bytes()).unwrap();
+    fs::write(output, md.as_bytes())?;
+    println!("Converted markdown has been saved in {}.", output);
+    Ok(())
 }
 
 // 3、函数传参
