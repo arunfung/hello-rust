@@ -12,11 +12,18 @@ fn main() {
     // 3、函数传参
     // function_parameter();
 
-    // 分号;表示其返回值为 unit
+    // 4、分号;表示其返回值为 unit
     // returned_value();
 
-    // 聊天服务数据结构
-    chat_room();
+    // 5、聊天服务数据结构
+    // chat_room();
+
+    // 6、loop、while、for
+    let n = 10;
+    fib_loop(n);
+    fib_while(n);
+    fib_for(n);
+    fib_arr();
 }
 
 // 1、猜测数字的小游戏
@@ -150,4 +157,49 @@ fn chat_room() {
     let event3 = Event::Message((alice.id, topic.id, "Hello world!".into()));
 
     println!("event1: {:?}, event2: {:?}, event3: {:?}", event1, event2, event3);
+}
+
+fn fib_loop(n: u8) {
+    let mut a = 1;
+    let mut b = 1;
+    let mut i = 2u8;
+
+    loop {
+        let c = a + b;
+        a = b;
+        b = c;
+        i += 1;
+        println!("next val is {}", b);
+
+        if i >= n {
+            break;
+        }
+    }
+}
+
+fn fib_while(n: u8) {
+    let (mut a, mut b, mut i) = (1, 1, 2);
+    while i < n {
+        let c = a + b;
+        a = b;
+        b = c;
+        i += 1;
+        println!("next val is {}", b);
+    }
+}
+
+fn fib_for(n: u8) {
+    let (mut a, mut b) = (1, 1);
+    for _i in 2..n {
+        let c = a + b;
+        a = b;
+        b = c;
+        println!("next val is {}", b);
+    }
+}
+
+fn fib_arr() {
+    let arr = [1, 2, 3];
+    assert_eq!(arr[..], [1, 2, 3]);
+    assert_eq!(arr[0..=1], [1, 2]);
 }
