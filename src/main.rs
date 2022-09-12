@@ -221,3 +221,14 @@ fn process_message(event: &Event) {
         println!("broadcast: {}", msg);
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::fib_arr;
+
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+        fib_arr();
+    }
+}
