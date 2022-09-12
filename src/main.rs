@@ -16,14 +16,14 @@ fn main() {
     // returned_value();
 
     // 5、聊天服务数据结构
-    // chat_room();
+    chat_room();
 
     // 6、loop、while、for
-    let n = 10;
-    fib_loop(n);
-    fib_while(n);
-    fib_for(n);
-    fib_arr();
+    // let n = 10;
+    // fib_loop(n);
+    // fib_while(n);
+    // fib_for(n);
+    // fib_arr();
 }
 
 // 1、猜测数字的小游戏
@@ -155,7 +155,8 @@ fn chat_room() {
     let event1 = Event::Join((alice.id, topic.id));
     let event2 = Event::Join((bob.id, topic.id));
     let event3 = Event::Message((alice.id, topic.id, "Hello world!".into()));
-
+    process_event(&event1);
+    process_message(&event3);
     println!("event1: {:?}, event2: {:?}, event3: {:?}", event1, event2, event3);
 }
 
@@ -202,4 +203,18 @@ fn fib_arr() {
     let arr = [1, 2, 3];
     assert_eq!(arr[..], [1, 2, 3]);
     assert_eq!(arr[0..=1], [1, 2]);
+}
+
+fn process_event(event: &Event) {
+    match event {
+        Event::Join((uid, _tid)) => println!("user {:?} joined", uid),
+        Event::Leave((uid, tid)) => println!("user {:?} left {:?}", uid, tid),
+        Event::Message((_, _, msg)) => println!("broadcast: {}", msg),
+    }
+}
+
+fn process_message(event: &Event) {
+    if let Event::Message((_, _, msg)) = event {
+        println!("broadcast: {}", msg);
+    }
 }
