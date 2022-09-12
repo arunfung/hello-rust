@@ -1,2 +1,2 @@
-# guessing_game
-guessing_game for rust
+# hello rust
+hello for rust
