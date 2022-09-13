@@ -64,13 +64,9 @@ fn guess_the_number() {
 
 // 2、请求一个url并将获取的HTML转成md
 fn html_to_md() -> Result<(), Box<dyn std::error::Error>> {
-    let mut args: Vec<String> = Vec::new();
-    for arg in std::env::args() {
-        args.push(arg);
-    }
-    let url = args[1].as_str();
-    let output = args[2].as_str();
-
+    let mut args: Vec<String> = std::env::args().collect();
+    let url = &args[1];
+    let output = &args[2];
     println!("Fetching url: {}", url);
     let body = reqwest::blocking::get(url)?.text()?;
     println!("Converting html to markdown...");
