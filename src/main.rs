@@ -3,12 +3,12 @@ use std::cmp::Ordering;
 use std::error::Error;
 use rand::Rng;
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 1、猜测数字的小游戏
     // guess_the_number();
 
     // 2、请求一个url并将获取的HTML转成md
-    // html_to_md()
+    html_to_md()
 
     // 3、函数传参
     // function_parameter();
@@ -20,10 +20,10 @@ fn main() {
     // chat_room();
 
     // 6、loop、while、for
-    let n = 10;
-    fib_loop(n);
-    fib_while(n);
-    fib_for(n);
+    // let n = 10;
+    // fib_loop(n);
+    // fib_while(n);
+    // fib_for(n);
     // fib_arr();
 }
 
@@ -64,8 +64,13 @@ fn guess_the_number() {
 
 // 2、请求一个url并将获取的HTML转成md
 fn html_to_md() -> Result<(), Box<dyn std::error::Error>> {
-    let url = "https://www.rust-lang.orgc";
-    let output = "rust.md";
+    let mut args: Vec<String> = Vec::new();
+    for arg in std::env::args() {
+        args.push(arg);
+    }
+    let url = args[1].as_str();
+    let output = args[2].as_str();
+
     println!("Fetching url: {}", url);
     let body = reqwest::blocking::get(url)?.text()?;
     println!("Converting html to markdown...");
